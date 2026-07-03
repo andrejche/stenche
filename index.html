@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="mk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Стенче — село во подножјето на Сува Гора</title>
+<meta name="description" content="с. Стенче, Општина Брвеница — 8000 години непрекинат живот, од неолитската населба Тумба Потсело до денес.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,500;0,700;0,900;1,600&family=Alegreya+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bone:#EDE6D6;
+    --bone-dim:#E1D7C0;
+    --soil:#2C2019;
+    --ink:#241A14;
+    --clay:#B5793A;
+    --clay-dark:#8C5A26;
+    --oxide:#A8452F;
+    --moss:#5B6B4F;
+    --moss-dark:#414F38;
+    --line: rgba(36,26,20,0.14);
+    --paper: #F4EFE3;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bone);
+    color:var(--ink);
+    font-family:'Alegreya Sans', sans-serif;
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,.display{
+    font-family:'Alegreya', serif;
+    font-weight:900;
+    letter-spacing:-0.01em;
+  }
+  .eyebrow{
+    font-family:'Alegreya Sans', sans-serif;
+    text-transform:uppercase;
+    letter-spacing:0.18em;
+    font-size:0.72rem;
+    font-weight:700;
+    color:var(--oxide);
+  }
+  a{color:inherit;}
+  img{max-width:100%; display:block;}
+  .wrap{max-width:1120px; margin:0 auto; padding:0 32px;}
+  section{position:relative;}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-end;
+    background:linear-gradient(180deg,#F6EFDD 0%, #EFE4C9 38%, #E7D6A8 62%, #D9BE83 100%);
+    overflow:hidden;
+  }
+  .hero-svg{
+    position:absolute; inset:0; width:100%; height:100%;
+  }
+  .hero-content{
+    position:relative;
+    z-index:5;
+    padding:0 32px 64px;
+    max-width:1120px;
+    margin:0 auto;
+    width:100%;
+  }
+  .hero-nav{
+    position:absolute; top:0; left:0; right:0; z-index:10;
+    display:flex; justify-content:space-between; align-items:center;
+    padding:28px 32px;
+    max-width:1120px; margin:0 auto;
+  }
+  .hero-nav .mark{font-family:'Alegreya',serif; font-weight:900; font-size:1.05rem;}
+  .hero-nav .links{display:flex; gap:28px; font-size:0.85rem; font-weight:500;}
+  .hero-nav .links a{opacity:0.75; text-decoration:none;}
+  .hero-nav .links a:hover{opacity:1;}
+  .hero-title{
+    font-size:clamp(3.4rem, 11vw, 8.4rem);
+    line-height:0.86;
+    color:var(--ink);
+  }
+  .hero-title .latin{
+    display:block;
+    font-family:'Alegreya', serif;
+    font-style:italic;
+    font-weight:500;
+    font-size:0.26em;
+    color:var(--oxide);
+    margin-top:0.25em;
+    letter-spacing:0.02em;
+  }
+  .hero-sub{
+    margin-top:26px;
+    max-width:520px;
+    font-size:1.08rem;
+    color:var(--soil);
+    font-weight:500;
+  }
+  .hero-facts{
+    margin-top:38px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:28px 44px;
+    padding-top:22px;
+    border-top:1px solid var(--line);
+  }
+  .hero-fact .num{font-family:'Alegreya',serif; font-weight:900; font-size:1.6rem; display:block;}
+  .hero-fact .lbl{font-size:0.78rem; text-transform:uppercase; letter-spacing:0.08em; opacity:0.65;}
+
+  /* ---------- INTRO ---------- */
+  .intro{
+    background:var(--paper);
+    padding:120px 0 100px;
+    border-top:1px solid var(--line);
+  }
+  .intro-grid{
+    display:grid;
+    grid-template-columns:1.3fr 1fr;
+    gap:80px;
+  }
+  .intro h2{font-size:clamp(2.1rem,4vw,3rem); line-height:1.05; max-width:11ch;}
+  .intro p{font-size:1.08rem; margin-top:22px; max-width:56ch; color:#3a2c22;}
+  .intro p + p{margin-top:14px;}
+  .locator{
+    border:1px solid var(--line);
+    padding:28px;
+    background:var(--bone);
+  }
+  .locator .eyebrow{margin-bottom:14px; display:block;}
+  .locator dl{display:grid; grid-template-columns:auto 1fr; gap:10px 16px; font-size:0.92rem;}
+  .locator dt{color:var(--clay-dark); font-weight:700;}
+  .locator dd{color:var(--soil);}
+  .locator hr{border:none; border-top:1px solid var(--line); margin:18px 0;}
+
+  /* ---------- STRATA (signature element) ---------- */
+  .strata{
+    background:var(--ink);
+    color:var(--bone);
+    padding:120px 0 140px;
+  }
+  .strata-head{max-width:640px; margin-bottom:70px;}
+  .strata-head .eyebrow{color:var(--clay);}
+  .strata-head h2{color:var(--bone); font-size:clamp(2.1rem,4vw,3rem); margin-top:14px;}
+  .strata-head p{margin-top:16px; opacity:0.72; font-size:1.05rem; max-width:56ch;}
+
+  .dig{
+    display:grid;
+    grid-template-columns:120px 1fr;
+    gap:0;
+  }
+  .dig-scale{
+    position:relative;
+    border-right:1px solid rgba(237,230,214,0.18);
+  }
+  .dig-scale .tick{
+    position:absolute; left:0; right:0;
+    font-size:0.72rem; opacity:0.5;
+    padding-right:16px; text-align:right;
+    transform:translateY(-50%);
+  }
+  .layer{
+    border-bottom:1px solid rgba(237,230,214,0.14);
+    padding:34px 0 34px 40px;
+    display:grid;
+    grid-template-columns:170px 1fr;
+    gap:28px;
+    opacity:0;
+    transform:translateY(18px);
+    transition:opacity .7s ease, transform .7s ease;
+  }
+  .layer.in{opacity:1; transform:translateY(0);}
+  .layer:last-child{border-bottom:none;}
+  .layer .era{
+    font-family:'Alegreya',serif; font-weight:700; font-style:italic;
+    font-size:1.15rem; color:var(--clay);
+  }
+  .layer .era small{display:block; font-family:'Alegreya Sans',sans-serif; font-style:normal; font-weight:400; opacity:0.55; font-size:0.78rem; margin-top:4px; letter-spacing:0.04em;}
+  .layer .body h3{font-size:1.15rem; font-weight:700; margin-bottom:8px; color:var(--bone);}
+  .layer .body p{font-size:0.98rem; opacity:0.75; max-width:58ch;}
+  .layer .swatch{
+    width:14px; height:14px; border-radius:50%;
+    display:inline-block; margin-right:10px; position:relative; top:-1px;
+  }
+
+  /* ---------- LANDMARKS ---------- */
+  .landmarks{
+    background:var(--bone);
+    padding:120px 0;
+  }
+  .lm-head{display:flex; justify-content:space-between; align-items:flex-end; gap:24px; margin-bottom:56px; flex-wrap:wrap;}
+  .lm-head h2{font-size:clamp(2.1rem,4vw,3rem); max-width:12ch;}
+  .lm-head p{max-width:38ch; color:#3a2c22; font-size:0.98rem;}
+  .lm-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+  }
+  .lm-card{
+    background:var(--paper);
+    padding:32px 28px;
+    min-height:230px;
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-end;
+    transition:background .3s ease;
+  }
+  .lm-card:hover{background:var(--bone-dim);}
+  .lm-card .icon{margin-bottom:auto; width:34px; height:34px;}
+  .lm-card h3{font-size:1.15rem; margin-bottom:8px; margin-top:20px;}
+  .lm-card p{font-size:0.92rem; color:#4a3a2c;}
+
+  /* ---------- LIFE TODAY ---------- */
+  .today{
+    background:var(--moss-dark);
+    color:var(--bone);
+    padding:120px 0;
+  }
+  .today-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:80px;
+    align-items:center;
+  }
+  .today blockquote{
+    font-family:'Alegreya',serif;
+    font-style:italic;
+    font-weight:500;
+    font-size:clamp(1.5rem,2.6vw,2.1rem);
+    line-height:1.35;
+  }
+  .today blockquote::before{content:"„"; color:var(--clay);}
+  .today blockquote::after{content:"“"; color:var(--clay);}
+  .today cite{
+    display:block;
+    margin-top:20px;
+    font-style:normal;
+    font-family:'Alegreya Sans',sans-serif;
+    font-size:0.82rem;
+    opacity:0.65;
+    letter-spacing:0.03em;
+  }
+  .pop{
+    background:rgba(237,230,214,0.06);
+    border:1px solid rgba(237,230,214,0.16);
+    padding:30px;
+  }
+  .pop .eyebrow{color:var(--clay); margin-bottom:18px; display:block;}
+  .pop-bars{display:flex; align-items:flex-end; gap:18px; height:160px; margin-top:8px;}
+  .pop-bar{flex:1; display:flex; flex-direction:column; align-items:center; justify-content:flex-end; gap:8px;}
+  .pop-bar .col{width:100%; background:var(--clay); position:relative;}
+  .pop-bar .val{font-size:0.78rem; font-weight:700;}
+  .pop-bar .yr{font-size:0.72rem; opacity:0.6;}
+  .pop-note{margin-top:18px; font-size:0.85rem; opacity:0.65;}
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    background:var(--ink);
+    color:var(--bone);
+    padding:70px 0 34px;
+  }
+  .foot-grid{
+    display:grid;
+    grid-template-columns:1.4fr 1fr 1fr;
+    gap:50px;
+    padding-bottom:50px;
+    border-bottom:1px solid rgba(237,230,214,0.14);
+  }
+  footer h4{font-family:'Alegreya Sans',sans-serif; text-transform:uppercase; letter-spacing:0.1em; font-size:0.75rem; opacity:0.55; margin-bottom:16px;}
+  footer .mark{font-family:'Alegreya',serif; font-weight:900; font-size:1.3rem; margin-bottom:14px;}
+  footer p{opacity:0.7; font-size:0.92rem; max-width:38ch;}
+  footer ul{list-style:none;}
+  footer li{margin-bottom:9px; font-size:0.92rem; opacity:0.75;}
+  .foot-bottom{
+    display:flex; justify-content:space-between; padding-top:26px;
+    font-size:0.8rem; opacity:0.5; flex-wrap:wrap; gap:10px;
+  }
+
+  @media (max-width:860px){
+    .intro-grid, .today-grid{grid-template-columns:1fr; gap:40px;}
+    .lm-grid{grid-template-columns:1fr;}
+    .foot-grid{grid-template-columns:1fr; gap:34px;}
+    .dig{grid-template-columns:1fr;}
+    .dig-scale{display:none;}
+    .layer{grid-template-columns:1fr; gap:10px; padding-left:0;}
+    .hero-nav .links{display:none;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ HERO ============ -->
+<header class="hero" id="top">
+  <div class="hero-nav">
+    <div class="mark">С.&nbsp;Стенче</div>
+    <nav class="links">
+      <a href="#intro">За селото</a>
+      <a href="#strata">Тумба Потсело</a>
+      <a href="#landmarks">Знаменитости</a>
+      <a href="#today">Денес</a>
+    </nav>
+  </div>
+
+  <svg class="hero-svg" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg">
+    <!-- sky gradient handled by CSS bg -->
+    <!-- far ridge: Suva Gora -->
+    <path d="M0 560 L120 500 L260 545 L400 470 L560 530 L700 460 L860 520 L1020 455 L1180 515 L1320 480 L1440 540 L1440 900 L0 900 Z" fill="#C7A968" opacity="0.55"/>
+    <!-- mid ridge -->
+    <path d="M0 650 L160 590 L340 640 L520 570 L680 630 L860 560 L1040 625 L1220 575 L1440 620 L1440 900 L0 900 Z" fill="#B0925A" opacity="0.7"/>
+    <!-- fortress silhouette on a rise -->
+    <g fill="#3B2A20" opacity="0.85">
+      <path d="M760 660 L790 605 L820 660 Z"/>
+      <rect x="778" y="618" width="10" height="22"/>
+      <rect x="796" y="628" width="10" height="18"/>
+      <rect x="748" y="640" width="10" height="20"/>
+    </g>
+    <!-- near hill / village line -->
+    <path d="M0 740 L200 700 L380 745 L600 690 L820 735 L1040 685 L1260 730 L1440 700 L1440 900 L0 900 Z" fill="#6E4F2C"/>
+    <!-- village rooftops -->
+    <g fill="#2C2019" opacity="0.9">
+      <path d="M120 745 l24 -26 l24 26 Z"/><rect x="132" y="745" width="24" height="20"/>
+      <path d="M190 752 l22 -24 l22 24 Z"/><rect x="201" y="752" width="22" height="18"/>
+      <path d="M980 730 l24 -26 l24 26 Z"/><rect x="992" y="730" width="24" height="20"/>
+      <path d="M1050 738 l20 -22 l20 22 Z"/><rect x="1060" y="738" width="20" height="16"/>
+      <path d="M1100 745 l22 -24 l22 24 Z"/><rect x="1111" y="745" width="22" height="18"/>
+      <!-- small church w/ cross -->
+      <rect x="300" y="712" width="20" height="26"/>
+      <path d="M298 712 l12 -14 l12 14 Z"/>
+      <line x1="310" y1="686" x2="310" y2="698" stroke="#2C2019" stroke-width="2"/>
+      <line x1="305" y1="691" x2="315" y2="691" stroke="#2C2019" stroke-width="2"/>
+    </g>
+    <!-- river vardar hint -->
+    <path d="M0 830 C 220 800, 300 860, 520 820 S 900 850, 1440 810 L1440 900 L0 900 Z" fill="#8C9E7F" opacity="0.35"/>
+  </svg>
+
+  <div class="hero-content">
+    <div class="eyebrow" style="margin-bottom:18px;">Општина Брвеница · Полошки регион</div>
+    <h1 class="hero-title">Стенче<span class="latin">village of Stenče, North Macedonia</span></h1>
+    <p class="hero-sub">На падините на Сува Гора, крај реката Вардар, помеѓу Тетово и Гостивар — село со 8000 години непрекинат живот, од неолитска населба до денешните дворови.</p>
+
+    <div class="hero-facts">
+      <div class="hero-fact"><span class="num">~600м</span><span class="lbl">Надм. височина</span></div>
+      <div class="hero-fact"><span class="num">8000</span><span class="lbl">Години населба</span></div>
+      <div class="hero-fact"><span class="num">14 км</span><span class="lbl">Од Гостивар</span></div>
+      <div class="hero-fact"><span class="num">1216</span><span class="lbl">Поштенски број</span></div>
+    </div>
+  </div>
+</header>
+
+<!-- ============ INTRO ============ -->
+<section class="intro" id="intro">
+  <div class="wrap intro-grid">
+    <div>
+      <div class="eyebrow">За селото</div>
+      <h2 style="margin-top:14px;">Меѓу Волковија и Теново, во сенка на Сува Гора</h2>
+      <p>Стенче е село во Општина Брвеница, сместено во областа Горни Полог, на падините на Сува Гора, недалеку од левиот брег на реката Вардар. Лежи на регионалниот пат Тетово–Гостивар, на речиси половина пат меѓу двата града — 25 километри јужно од Тетово и 14 километри северно од Гостивар.</p>
+      <p>Историски, селото било дел од Тетовската каза во времето на Отоманската Империја. Денес е едно од десетте населени места во општината, со корени што допираат далеку подлабоко од пишаната историја — до неолитот.</p>
+    </div>
+    <aside class="locator">
+      <span class="eyebrow">Локација</span>
+      <dl>
+        <dt>Општина</dt><dd>Брвеница</dd>
+        <dt>Регион</dt><dd>Полошки / Горни Полог</dd>
+        <dt>Соседни села</dt><dd>Волковија, Теново</dd>
+        <dt>Најблизок град</dt><dd>Гостивар (14 км)</dd>
+        <dt>Река</dt><dd>Вардар</dd>
+        <dt>Планина</dt><dd>Сува Гора</dd>
+      </dl>
+      <hr>
+      <dl>
+        <dt>1900</dt><dd>680 жители</dd>
+        <dt>1929</dt><dd>957 жители</dd>
+        <dt>2021</dt><dd>131 жител</dd>
+      </dl>
+    </aside>
+  </div>
+</section>
+
+<!-- ============ STRATA / EXCAVATION (signature) ============ -->
+<section class="strata" id="strata">
+  <div class="wrap">
+    <div class="strata-head">
+      <span class="eyebrow">Тумба Потсело · археологија</span>
+      <h2>Секој слој почва — уште еден век</h2>
+      <p>Под селото, на брегот на Вардар, ископувањата на локалитетот Тумба Потсело и Стенчевската тврдина открија непрекинат низ од културни слоеви — од раниот неолит до средниот век. Малку места во Полог чуваат толкава длабочина на време на едно место.</p>
+    </div>
+
+    <div class="dig" id="dig">
+      <div class="dig-scale">
+        <span class="tick" style="top:0%">денес</span>
+        <span class="tick" style="top:96%">−8000 г.</span>
+      </div>
+      <div>
+        <div class="layer">
+          <div class="era"><span class="swatch" style="background:var(--moss)"></span>Денес<small>XX–XXI век</small></div>
+          <div class="body">
+            <h3>Мирно село</h3>
+            <p>Стотина жители, повеќето постари. Земјоделство и сточарство, куќи наредени по патот кон Гургурница, децата одамна отселени во Тетово и Гостивар.</p>
+          </div>
+        </div>
+        <div class="layer">
+          <div class="era"><span class="swatch" style="background:var(--clay)"></span>Отоманско<small>XV–XX век</small></div>
+          <div class="body">
+            <h3>Дел од Тетовската каза</h3>
+            <p>Селото фигурира во отомански пописи и патописи; на локалитетот се пронајдени и венецијански монети — трага од трговски патишта низ Полог во XIV–XV век.</p>
+          </div>
+        </div>
+        <div class="layer">
+          <div class="era"><span class="swatch" style="background:var(--oxide)"></span>Ранохристијанско<small>V век</small></div>
+          <div class="body">
+            <h3>Епископски центар</h3>
+            <p>На тврдината е откриена ранохристијанска базилика со три крстилници — единствена со ваков број во Македонија — и голем железен крст од V век, знак дека Стенче можеби бил седиште на епископија.</p>
+          </div>
+        </div>
+        <div class="layer">
+          <div class="era"><span class="swatch" style="background:#8C9E7F"></span>Антика<small>Римски период</small></div>
+          <div class="body">
+            <h3>Тврдина на ридот</h3>
+            <p>На зарамнето плато, опкружено со кули и бедеми градени во малтерна техника — континуитет на живот со градски белези, według археологот Владимир Лилчиќ, без прекин до денес.</p>
+          </div>
+        </div>
+        <div class="layer">
+          <div class="era"><span class="swatch" style="background:var(--bone-dim)"></span>Доцен неолит<small>~ 5000 г. пр.н.е.</small></div>
+          <div class="body">
+            <h3>Влијание од север</h3>
+            <p>Подоцнежните слоеви покажуваат влијание на Винчанската култура — нови форми и украси во керамиката, знак на поширока размена низ Балканот.</p>
+          </div>
+        </div>
+        <div class="layer">
+          <div class="era"><span class="swatch" style="background:var(--clay-dark)"></span>Ран неолит<small>6100 г. пр.н.е.</small></div>
+          <div class="body">
+            <h3>Тумба Потсело</h3>
+            <p>Најстариот хоризонт — куќи градени по големина на семејство, керамика сликана со бело и кафеаво, и цел жртвеник од типот на Големата Мајка, поврзан со Анзабегово–вршничката културна група.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LANDMARKS ============ -->
+<section class="landmarks" id="landmarks">
+  <div class="wrap">
+    <div class="lm-head">
+      <h2>Знаменитости на селото</h2>
+      <p>Од праисториска населба до селски цркви — местата што го обликуваат Стенче.</p>
+    </div>
+    <div class="lm-grid">
+
+      <div class="lm-card">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="#8C5A26" stroke-width="1.4"><path d="M3 20h18M5 20V9l7-5 7 5v11M9 20v-6h6v6"/></svg>
+        <h3>Стенчевска тврдина</h3>
+        <p>Утврдување на 730м надм. височина; ископувања 1973–2007. Плато опкружено со кули и бедеми градени во малтерна техника.</p>
+      </div>
+
+      <div class="lm-card">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="#8C5A26" stroke-width="1.4"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M19.1 4.9l-2.8 2.8M7.7 16.3l-2.8 2.8"/></svg>
+        <h3>Тумба Потсело</h3>
+        <p>Неолитска населба на брегот на Вардар — извориште на белата и кафеавата сликана керамика, карактеристична за целиот Полог.</p>
+      </div>
+
+      <div class="lm-card">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="#8C5A26" stroke-width="1.4"><path d="M12 2l2 5 5 .7-3.6 3.5.9 5-4.3-2.3L7.7 16.2l.9-5L5 6.7 10 6z"/></svg>
+        <h3>Ранохристијанска базилика</h3>
+        <p>Базилика од V век со три крстилници — единствена со тој број во Македонија; трага дека Стенче бил епископски центар на Полог.</p>
+      </div>
+
+      <div class="lm-card">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="#8C5A26" stroke-width="1.4"><path d="M12 3v18M6 8l6-5 6 5M4 21h16"/></svg>
+        <h3>Црква „Св. Илија“</h3>
+        <p>Една од четирите селски цркви, покрај „Св. Петка“, „Св. Атанасиј“ и „Св. Екатерина“ — центри на верскиот живот на селото.</p>
+      </div>
+
+      <div class="lm-card">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="#8C5A26" stroke-width="1.4"><path d="M4 20c2-6 4-9 8-9s6 3 8 9M9 11c0-3 1-5 3-7 2 2 3 4 3 7"/></svg>
+        <h3>Дабова шума кон Гургурница</h3>
+        <p>Патот кон повисокото село Гургурница минува низ бујна дабова шума, каде во неа стои црквата „Св. Петка“.</p>
+      </div>
+
+      <div class="lm-card">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="#8C5A26" stroke-width="1.4"><path d="M12 2C9 5 8 9 8 12a4 4 0 008 0c0-3-1-7-4-10z"/><path d="M8 16c-3 1-4 3-4 6M16 16c3 1 4 3 4 6"/></svg>
+        <h3>Невестинска носија</h3>
+        <p>Стенче го чува своето издание на невестинската носија — типична македонска носија карактеристична за Горни Полог.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ LIFE TODAY ============ -->
+<section class="today" id="today">
+  <div class="wrap today-grid">
+    <div>
+      <span class="eyebrow" style="color:var(--clay)">Село денес</span>
+      <blockquote style="margin-top:20px;">Секој агол од ова место ќе ве наврати години наназад кога по селската калдрма се слушал детскиот џагор.</blockquote>
+      <cite>— од фото-репортажа за Стенче, „тивкото село на Сува Гора“</cite>
+    </div>
+    <div class="pop">
+      <span class="eyebrow">Население низ годините</span>
+      <div class="pop-bars">
+        <div class="pop-bar"><span class="val">680</span><div class="col" style="height:100px"></div><span class="yr">1900</span></div>
+        <div class="pop-bar"><span class="val">957</span><div class="col" style="height:141px"></div><span class="yr">1929</span></div>
+        <div class="pop-bar"><span class="val">550</span><div class="col" style="height:81px"></div><span class="yr">1941</span></div>
+        <div class="pop-bar"><span class="val">150</span><div class="col" style="height:22px"></div><span class="yr">2002</span></div>
+        <div class="pop-bar"><span class="val">131</span><div class="col" style="height:19px"></div><span class="yr">2021</span></div>
+      </div>
+      <p class="pop-note">Како и во многу села на Сува Гора, младите одамна се преселиле во Тетово и Гостивар — денес во Стенче остануваат претежно постари мештани.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="mark">С. Стенче</div>
+        <p>Село во Општина Брвеница, Полошки регион, Северна Македонија — на патот меѓу Тетово и Гостивар, во подножјето на Сува Гора.</p>
+      </div>
+      <div>
+        <h4>Локација</h4>
+        <ul>
+          <li>Општина Брвеница</li>
+          <li>Полошки регион</li>
+          <li>Пошт. број 1216</li>
+        </ul>
+      </div>
+      <div>
+        <h4>На страницата</h4>
+        <ul>
+          <li><a href="#intro">За селото</a></li>
+          <li><a href="#strata">Тумба Потсело</a></li>
+          <li><a href="#landmarks">Знаменитости</a></li>
+          <li><a href="#today">Село денес</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>Изработено за селото Стенче</span>
+      <span>Извори: Википедија, Македонска енциклопедија, Фокус</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // reveal strata layers on scroll
+  const layers = document.querySelectorAll('.layer');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, {threshold:0.25});
+  layers.forEach(l=>io.observe(l));
+</script>
+
+</body>
+</html>
