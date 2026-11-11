@@ -260,6 +260,52 @@
   .pop-bar .yr{font-size:0.72rem; opacity:0.6;}
   .pop-note{margin-top:18px; font-size:0.85rem; opacity:0.65;}
 
+  /* ---------- HERO PHOTO (auto-used if assets/picture.png exists) ---------- */
+  .hero-photo{
+    position:absolute; inset:0; width:100%; height:100%;
+    object-fit:cover; z-index:1;
+  }
+  .hero.has-photo::after{
+    content:""; position:absolute; inset:0; z-index:2;
+    background:linear-gradient(180deg, rgba(36,26,20,.35) 0%, rgba(36,26,20,.15) 40%, rgba(36,26,20,.78) 100%);
+  }
+  .hero.has-photo .hero-svg{display:none;}
+  .hero.has-photo .hero-title,
+  .hero.has-photo .hero-sub,
+  .hero.has-photo .hero-nav,
+  .hero.has-photo .hero-fact{color:var(--bone);}
+  .hero.has-photo .hero-title .latin,
+  .hero.has-photo .eyebrow{color:#E9B27A;}
+  .hero.has-photo .hero-facts{border-top-color:rgba(237,230,214,.28);}
+  .hero-nav{z-index:10;}
+
+  /* ---------- GALLERY ---------- */
+  .gallery{background:var(--paper); padding:120px 0; border-top:1px solid var(--line);}
+  .gal-head{display:flex; justify-content:space-between; align-items:flex-end; gap:24px; flex-wrap:wrap; margin-bottom:48px;}
+  .gal-head h2{font-size:clamp(2.1rem,4vw,3rem); max-width:12ch;}
+  .gal-head p{max-width:38ch; color:#3a2c22; font-size:0.98rem;}
+  .gal-grid{columns:3 280px; column-gap:14px;}
+  .gal-item{
+    break-inside:avoid; margin-bottom:14px; display:block; width:100%;
+    border:none; padding:0; background:var(--bone-dim); cursor:zoom-in; overflow:hidden;
+  }
+  .gal-item img{width:100%; height:auto; transition:transform .5s ease, opacity .5s ease; opacity:0;}
+  .gal-item img.loaded{opacity:1;}
+  .gal-item:hover img{transform:scale(1.03);}
+  .gal-more{display:block; margin:36px auto 0; padding:12px 28px; background:var(--ink); color:var(--bone); border:none; font-family:'Alegreya Sans',sans-serif; font-weight:700; letter-spacing:.06em; text-transform:uppercase; font-size:.78rem; cursor:pointer;}
+  .gal-more:hover{background:var(--oxide);}
+  .gal-empty{padding:40px; border:1px dashed var(--line); text-align:center; color:#6b5a48;}
+
+  .lightbox{position:fixed; inset:0; background:rgba(20,14,10,.94); z-index:100; display:none; align-items:center; justify-content:center; padding:40px;}
+  .lightbox.open{display:flex;}
+  .lightbox img{max-width:100%; max-height:100%; object-fit:contain;}
+  .lb-btn{position:absolute; background:none; border:none; color:var(--bone); font-size:2.2rem; cursor:pointer; padding:14px 18px; opacity:.75;}
+  .lb-btn:hover{opacity:1;}
+  .lb-close{top:10px; right:14px;}
+  .lb-prev{left:10px; top:50%; transform:translateY(-50%);}
+  .lb-next{right:10px; top:50%; transform:translateY(-50%);}
+  .lb-count{position:absolute; bottom:18px; left:0; right:0; text-align:center; color:var(--bone); opacity:.6; font-size:.85rem;}
+
   /* ---------- FOOTER ---------- */
   footer{
     background:var(--ink);
@@ -305,8 +351,11 @@
       <a href="#strata">Тумба Потсело</a>
       <a href="#landmarks">Знаменитости</a>
       <a href="#today">Денес</a>
+      <a href="#gallery">Галерија</a>
     </nav>
   </div>
+
+  <img class="hero-photo" src="assets/hero.jpg" alt="Село Стенче" onload="this.parentElement.classList.add('has-photo')" onerror="this.remove()">
 
   <svg class="hero-svg" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg">
     <!-- sky gradient handled by CSS bg -->
@@ -445,76 +494,26 @@
   </div>
 </section>
 
-<!-- ============ LANDMARKS ============ -->
-<section class="landmarks" id="landmarks">
+
+<!-- ============ GALLERY ============ -->
+<section class="gallery" id="gallery">
   <div class="wrap">
-    <div class="lm-head">
-      <h2>Знаменитости на селото</h2>
-      <p>Од праисториска населба до селски цркви — местата што го обликуваат Стенче.</p>
+    <div class="gal-head">
+      <h2>Фотографии од Стенче</h2>
+      <p>Селото низ објективот на неговите мештани и посетители.</p>
     </div>
-    <div class="lm-grid">
-
-      <div class="lm-card">
-        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="#8C5A26" stroke-width="1.4"><path d="M3 20h18M5 20V9l7-5 7 5v11M9 20v-6h6v6"/></svg>
-        <h3>Стенчевска тврдина</h3>
-        <p>Утврдување на 730м надм. височина; ископувања 1973–2007. Плато опкружено со кули и бедеми градени во малтерна техника.</p>
-      </div>
-
-      <div class="lm-card">
-        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="#8C5A26" stroke-width="1.4"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M19.1 4.9l-2.8 2.8M7.7 16.3l-2.8 2.8"/></svg>
-        <h3>Тумба Потсело</h3>
-        <p>Неолитска населба на брегот на Вардар — извориште на белата и кафеавата сликана керамика, карактеристична за целиот Полог.</p>
-      </div>
-
-      <div class="lm-card">
-        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="#8C5A26" stroke-width="1.4"><path d="M12 2l2 5 5 .7-3.6 3.5.9 5-4.3-2.3L7.7 16.2l.9-5L5 6.7 10 6z"/></svg>
-        <h3>Ранохристијанска базилика</h3>
-        <p>Базилика од V век со три крстилници — единствена со тој број во Македонија; трага дека Стенче бил епископски центар на Полог.</p>
-      </div>
-
-      <div class="lm-card">
-        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="#8C5A26" stroke-width="1.4"><path d="M12 3v18M6 8l6-5 6 5M4 21h16"/></svg>
-        <h3>Црква „Св. Илија“</h3>
-        <p>Една од четирите селски цркви, покрај „Св. Петка“, „Св. Атанасиј“ и „Св. Екатерина“ — центри на верскиот живот на селото.</p>
-      </div>
-
-      <div class="lm-card">
-        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="#8C5A26" stroke-width="1.4"><path d="M4 20c2-6 4-9 8-9s6 3 8 9M9 11c0-3 1-5 3-7 2 2 3 4 3 7"/></svg>
-        <h3>Дабова шума кон Гургурница</h3>
-        <p>Патот кон повисокото село Гургурница минува низ бујна дабова шума, каде во неа стои црквата „Св. Петка“.</p>
-      </div>
-
-      <div class="lm-card">
-        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="#8C5A26" stroke-width="1.4"><path d="M12 2C9 5 8 9 8 12a4 4 0 008 0c0-3-1-7-4-10z"/><path d="M8 16c-3 1-4 3-4 6M16 16c3 1 4 3 4 6"/></svg>
-        <h3>Невестинска носија</h3>
-        <p>Стенче го чува своето издание на невестинската носија — типична македонска носија карактеристична за Горни Полог.</p>
-      </div>
-
-    </div>
+    <div class="gal-grid" id="galGrid"></div>
+    <button class="gal-more" id="galMore" style="display:none">Прикажи повеќе</button>
   </div>
 </section>
 
-<!-- ============ LIFE TODAY ============ -->
-<section class="today" id="today">
-  <div class="wrap today-grid">
-    <div>
-      <span class="eyebrow" style="color:var(--clay)">Село денес</span>
-      <blockquote style="margin-top:20px;">Секој агол од ова место ќе ве наврати години наназад кога по селската калдрма се слушал детскиот џагор.</blockquote>
-      <cite>— од фото-репортажа за Стенче, „тивкото село на Сува Гора“</cite>
-    </div>
-    <div class="pop">
-      <span class="eyebrow">Население низ годините</span>
-      <div class="pop-bars">
-        <div class="pop-bar"><span class="val">680</span><div class="col" style="height:100px"></div><span class="yr">1900</span></div>
-        <div class="pop-bar"><span class="val">957</span><div class="col" style="height:141px"></div><span class="yr">1929</span></div>
-        <div class="pop-bar"><span class="val">550</span><div class="col" style="height:81px"></div><span class="yr">1941</span></div>
-        <div class="pop-bar"><span class="val">150</span><div class="col" style="height:22px"></div><span class="yr">2002</span></div>
-        <div class="pop-bar"><span class="val">131</span><div class="col" style="height:19px"></div><span class="yr">2021</span></div>
-      </div>
-      <p class="pop-note">Како и во многу села на Сува Гора, младите одамна се преселиле во Тетово и Гостивар — денес во Стенче остануваат претежно постари мештани.</p>
-    </div>
-  </div>
-</section>
+<div class="lightbox" id="lb" aria-hidden="true">
+  <button class="lb-btn lb-close" id="lbClose" aria-label="Затвори">&times;</button>
+  <button class="lb-btn lb-prev" id="lbPrev" aria-label="Претходна">&#8249;</button>
+  <img id="lbImg" alt="">
+  <button class="lb-btn lb-next" id="lbNext" aria-label="Следна">&#8250;</button>
+  <div class="lb-count" id="lbCount"></div>
+</div>
 
 <!-- ============ FOOTER ============ -->
 <footer>
@@ -539,6 +538,7 @@
           <li><a href="#strata">Тумба Потсело</a></li>
           <li><a href="#landmarks">Знаменитости</a></li>
           <li><a href="#today">Село денес</a></li>
+          <li><a href="#gallery">Галерија</a></li>
         </ul>
       </div>
     </div>
@@ -561,6 +561,64 @@
     });
   }, {threshold:0.25});
   layers.forEach(l=>io.observe(l));
+</script>
+
+<script src="gallery.js" onerror="window.GALLERY=window.GALLERY||[]"></script>
+<script>
+  // ---- gallery ----
+  (function(){
+    const photos = window.GALLERY || [];
+    const grid = document.getElementById('galGrid');
+    const more = document.getElementById('galMore');
+    const PAGE = 24;
+    let shown = 0;
+
+    if(!photos.length){
+      grid.outerHTML = '<div class="gal-empty">Фотографиите наскоро ќе бидат додадени.</div>';
+      return;
+    }
+    function render(){
+      const end = Math.min(shown + PAGE, photos.length);
+      for(let i = shown; i < end; i++){
+        const b = document.createElement('button');
+        b.className = 'gal-item';
+        b.dataset.i = i;
+        const img = new Image();
+        img.loading = 'lazy';
+        img.alt = 'Стенче — фотографија ' + (i+1);
+        img.src = photos[i].thumb;
+        img.onload = () => img.classList.add('loaded');
+        b.appendChild(img);
+        b.addEventListener('click', () => open(i));
+        grid.appendChild(b);
+      }
+      shown = end;
+      more.style.display = shown < photos.length ? 'block' : 'none';
+    }
+    more.addEventListener('click', render);
+    render();
+
+    // lightbox
+    const lb = document.getElementById('lb'), lbImg = document.getElementById('lbImg'), lbCount = document.getElementById('lbCount');
+    let cur = 0;
+    function show(i){
+      cur = (i + photos.length) % photos.length;
+      lbImg.src = photos[cur].full;
+      lbCount.textContent = (cur+1) + ' / ' + photos.length;
+    }
+    function open(i){ lb.classList.add('open'); lb.setAttribute('aria-hidden','false'); show(i); }
+    function close(){ lb.classList.remove('open'); lb.setAttribute('aria-hidden','true'); lbImg.src=''; }
+    document.getElementById('lbClose').onclick = close;
+    document.getElementById('lbPrev').onclick = () => show(cur-1);
+    document.getElementById('lbNext').onclick = () => show(cur+1);
+    lb.addEventListener('click', e => { if(e.target === lb) close(); });
+    document.addEventListener('keydown', e => {
+      if(!lb.classList.contains('open')) return;
+      if(e.key === 'Escape') close();
+      if(e.key === 'ArrowLeft') show(cur-1);
+      if(e.key === 'ArrowRight') show(cur+1);
+    });
+  })();
 </script>
 
 </body>
